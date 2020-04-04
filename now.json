@@ -1,6 +1,6 @@
 {
   "name": "mutual-aid-aid",
-  "version": 0.1,
+  "version": 2,
   "build": {
     "env": {
       "MONGODB_URI": "@mongodb-uri",

@@ -8,9 +8,7 @@ import { fields, textyTypes } from '../lib/form-fields';
 import { useUser } from '../lib/hooks';
 import Geocoder from 'react-mapbox-gl-geocoder';
 
-const FormRow = ({
-	children, _id, label
-}) => {
+const FormRow = ({children, _id, label}) => {
 	const { Row, Label } = Form;
 	return (
 		<Row>
@@ -81,9 +79,7 @@ const FormControl = ({
 	return control;
 };
 
-export const MyForm = ({ 
-	handleSave, errorMsg, role,
-}) => {
+export const MyForm = ({handleSave, errorMsg, role}) => {
 	const formFields = adjust(
 		findIndex(propEq('_id', 'role')) (fields),
 		mergeLeft({initialValue: role}),

@@ -3,15 +3,13 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useUser } from '../lib/hooks';
+export const sendHomeIfDefined = (user, home = '/home') => () => { if (user) router.push(home); };
 
 const LoginPage = () => {
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { mutate }] = useUser();
-  useEffect(() => {
-    // redirect to home if user is authenticated
-    if (user) router.push('/');
-  }, [user]);
+  useEffect(sendHomeIfDefined(user), [user]);
 
   async function onSubmit(e) {
     e.preventDefault();

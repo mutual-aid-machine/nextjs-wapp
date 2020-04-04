@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useUser } from '../lib/hooks';
 import { sendHomeIfDefined } from './login';
+import { WildLink, wildStyle} from '../components/layout';
 const links = [
 	{
 		href: "/signup?role=to-help",
@@ -31,12 +32,11 @@ export const MenuItem = ({href, text, component}, idx) => {
 		</a>
 	);
 	return (
-		<Link
-			key={idx}
+		<WildLink
 			href={href}
-		>
-			{textyBit}
-		</Link>
+			title={text}
+			color='pink'
+		/>
 	);
 };
 
@@ -45,31 +45,22 @@ const IndexPage = () => {
 
 	useEffect(sendHomeIfDefined(user, '/home'), [user]);
 
-	const body = user ? (
-		<div>
-			meme
-		</div>
-	) : (
-		<div
-		>
-			<h2>
-				Welcome to Mutual Aid.
-				<br/>
-				Are you:
-			</h2>
-			{links.map(MenuItem)}
-		</div>
-	);
-
   return (
     <>
       <style jsx global>{`
-          h2, h3 {
-            text-align: left;
-						font-size: 1.5em;
-          }
+				h2, h3 {
+					text-align: left;
+					font-size: 1.5em;
+				}
       `}</style>
-			{body}
+			<div>
+				<h2 style={wildStyle()}>
+					Welcome to Mutual Aid.
+					<br/>
+					Are you:
+				</h2>
+				{links.map(MenuItem)}
+			</div>
     </>
   );
 };

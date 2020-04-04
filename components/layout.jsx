@@ -2,16 +2,115 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useUser } from '../lib/hooks';
+import { mergeLeft } from 'ramda';
+import Navbar from 'react-bootstrap/Navbar';
+const handleLogoutUncurried = (mutate) => () => {
+	fetch('/api/auth', {
+		method: 'DELETE',
+	}).then(() => mutate(null));
+};
+export const wildColor = c => {
+	switch(c) {
+		case 'pink':
+			return '#d2738b';
+		case 'teal':
+			return '#559a82';
+		case 'green':
+			return '#c9dd79';
+		default:
+			return '#ffffff';
+	}
+};
+export const wildStyle = ({color = 'white', width = 'fit-content'} = {}) => ({
+	width,
+	color: wildColor(color),
+	background: 'black',
+	padding: '5px',
+	// fontStyle: 'italic',
+});
+
+//color in pink | teal | green
+export const WildLink = ({
+	href, title, color, component, long = false, style: pStyle = {}
+}) => {
+	const style = mergeLeft(wildStyle({
+		color,
+		width: long ? '100%' : 'fit-content'
+	}), pStyle);
+
+	const text = component ? (
+		<component style={style}>{title}</component>
+	) : (
+		<h3 style={style}>{title}</h3>
+	);
+
+	return (
+		<Link href={href}>
+			<a>
+				{text}
+			</a>
+		</Link>
+	);
+};
+
+export const MeNavBar = ({
+	title, user
+}) => {
+	const {Brand} = Navbar;
+	const signInOutButtons = !user ? (
+		<>
+			<WildLink
+				href="/login"
+				title='Sign in'
+				color='green'
+				component={props => <p {...props}/>}
+			/>
+			<WildLink
+				href="/signup"
+				title='Sign up'
+				color='green'
+				component={props => <p {...props}/>}
+			/>
+		</>
+	) : (
+		<>
+			<WildLink
+				href="/profile"
+				title='Profile'
+				color='green'
+				component={props => <p {...props}/>}
+			/>
+			{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+			<a tabIndex={0} role="button" onClick={handleLogout}>
+				Logout
+			</a>
+		</>
+	);
+
+	return (
+		<Navbar>
+			<Brand>
+				<WildLink 
+					href='/'
+					title={title}
+					color='pink'
+					style={{
+						fontWeight: 'bold',
+					}}
+					component={props => <h1 {...props} />}
+				/>
+			</Brand>
+			<div>
+				{signInOutButtons}
+			</div>
+		</Navbar>
+	);
+};
 
 export default ({ children }) => {
   const [user, { mutate }] = useUser();
-  const handleLogout = async () => {
-    await fetch('/api/auth', {
-      method: 'DELETE',
-    });
-    mutate(null);
-  };
 	const title = 'Mutual Aid Aid';
+	const handleLogout = handleLogoutUncurried(mutate);
   return (
     <>
       <style jsx global>
@@ -28,9 +127,10 @@ export default ({ children }) => {
             margin: 0;
             padding: 0;
             color: #111;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+            font-family: 'DM Serif Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
               'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
               'Helvetica Neue', sans-serif;
+						font-size: 1.5em;
             background-color: #fff;
           }
           h2 {
@@ -146,35 +246,10 @@ export default ({ children }) => {
         />
       </Head>
       <header>
-        <nav>
-          <Link href="/">
-            <a>
-              <h1>{title}</h1>
-            </a>
-          </Link>
-          <div>
-            {!user ? (
-              <>
-                <Link href="/login">
-                  <a>Sign in</a>
-                </Link>
-                <Link href="/signup">
-                  <a>Sign up</a>
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link href="/profile">
-                  <a>Profile</a>
-                </Link>
-                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <a tabIndex={0} role="button" onClick={handleLogout}>
-                  Logout
-                </a>
-              </>
-            )}
-          </div>
-        </nav>
+				<MeNavBar
+					title={title}
+					user={user}
+				/>
       </header>
       <main>{children}</main>
       <footer>

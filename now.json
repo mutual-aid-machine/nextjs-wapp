@@ -1,0 +1,11 @@
+{
+  "name": "mutual-aid-aid",
+  "version": 0.1,
+  "build": {
+    "env": {
+      "MONGODB_URI": "@mongodb-uri",
+      "DB_NAME": "mutual-aid-aid",
+      "WEB_URI": "https://mutual-aid-aid.now.sh"
+    }
+  }
+}

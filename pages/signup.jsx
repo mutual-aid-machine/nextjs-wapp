@@ -162,21 +162,6 @@ const SignupPage = () => {
 	const {query: {role}} = useRouter();
 	const [form, setForm] = useState(null);
 
-  useEffect(() => {
-    // redirect to home if user is authenticated
-    if (user) Router.replace('/');
-  }, [user]);
-
-	useEffect(() => {
-		setForm(role ? (
-			<MyForm
-				handleSave={handleSave}
-				errorMsg={errorMsg}
-				role={role}
-			/>
-		) : null);
-	}, [role]);
-
 	const handleSave = async ({email, name, password, profile}) => {
 		const finalRole = profile.role || role;
 		const body = {
@@ -194,9 +179,26 @@ const SignupPage = () => {
       const userObj = await res.json();
       mutate(userObj);
     } else {
-      setErrorMsg(await res.text());
+			const text = await res.text();
+			console.error(text);
+      setErrorMsg(text);
     }
 	};
+
+  useEffect(() => {
+    // redirect to home if user is authenticated
+    if (user) Router.replace('/');
+  }, [user]);
+
+	useEffect(() => {
+		setForm(role ? (
+			<MyForm
+				handleSave={handleSave}
+				errorMsg={errorMsg}
+				role={role}
+			/>
+		) : null);
+	}, [role, errorMsg]);
 
   return (
     <>

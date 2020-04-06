@@ -1,7 +1,7 @@
 {
-  "name": "nextjs-mongodb-app",
-  "version": "1.0.0",
-  "description": "Full fledged app made with Next.JS and MongoDB",
+  "name": "nextjs-wapp",
+  "version": "0.1.0",
+  "description": "mutual aid aid",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hoangvvo/nextjs-mongodb-app.git"
+    "url": "git+https://github.com/mutual-aid-machine/nextjs-wapp"
   },
-  "author": "Hoang Vo (https://www.hoangvvo.com)",
+  "author": "daxi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hoangvvo/nextjs-mongodb-app/issues"
+    "url": "https://github.com/mutual-aid-machine/nextjs-wapp/issues"
   },
-  "homepage": "https://github.com/hoangvvo/nextjs-mongodb-app#readme",
+  "homepage": "https://github.com/mutual-aid-machine/nextjs-wapp#readme",
   "dependencies": {
     "@sendgrid/mail": "^6.5.5",
     "bcryptjs": "^2.4.3",
@@ -27,6 +27,7 @@
     "connect-mongo": "^3.2.0",
     "dotenv": "^8.2.0",
     "formik": "^2.1.4",
+    "isomorphic-unfetch": "^3.0.0",
     "mongodb": "^3.5.5",
     "multer": "^1.4.2",
     "next": "^9.3.1",

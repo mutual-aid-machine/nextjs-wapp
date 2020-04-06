@@ -197,7 +197,13 @@ const SignupPage = () => {
 				errorMsg={errorMsg}
 				role={role}
 			/>
-		) : null);
+		) : (
+			<MyForm
+				handleSave={handleSave}
+				errorMsg={errorMsg}
+				role='to-help'
+			/>
+		));
 	}, [role, errorMsg]);
 
   return (

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useUser } from '../lib/hooks';
+import { useRouter } from 'next/router';
 import { sendHomeIfDefined } from './login';
 import { WildLink, wildStyle} from '../components/layout';
 const links = [
@@ -36,14 +37,16 @@ export const MenuItem = ({href, text, component}, idx) => {
 			href={href}
 			title={text}
 			color='pink'
+			key={`menuItem-${idx}`}
 		/>
 	);
 };
 
 const IndexPage = () => {
   const [user] = useUser();
+  const router = useRouter();
 
-	useEffect(sendHomeIfDefined(user, '/home'), [user]);
+	useEffect(() => sendHomeIfDefined(user, router, '/home'), [user]);
 
   return (
     <>

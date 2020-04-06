@@ -33,10 +33,8 @@ export const wildStyle = ({color = 'white', width = 'fit-content'} = {}) => ({
 export const WildLink = ({
 	href, title, color, component, long = false, style: pStyle = {}
 }) => {
-	const style = mergeLeft(wildStyle({
-		color,
-		width: long ? '100%' : 'fit-content'
-	}), pStyle);
+	const width = long ? '100%' : 'fit-content';
+	const style = mergeLeft(wildStyle({color, width}), pStyle);
 
 	const text = component ? (
 		<component style={style}>{title}</component>
@@ -54,7 +52,7 @@ export const WildLink = ({
 };
 
 export const MeNavBar = ({
-	title, user
+	title, user, handleLogout
 }) => {
 	const {Brand} = Navbar;
 	const signInOutButtons = !user ? (
@@ -249,6 +247,7 @@ export default ({ children }) => {
 				<MeNavBar
 					title={title}
 					user={user}
+					handleLogout={handleLogout}
 				/>
       </header>
       <main>{children}</main>

@@ -3,13 +3,13 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useUser } from '../lib/hooks';
-export const sendHomeIfDefined = (user, home = '/home') => () => { if (user) router.push(home); };
+export const sendHomeIfDefined = (user, router, home = '/home') => { if (user) router.push(home); };
 
 const LoginPage = () => {
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { mutate }] = useUser();
-  useEffect(sendHomeIfDefined(user), [user]);
+  // useEffect(() => sendHomeIfDefined(user, router), [user]);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -26,7 +26,7 @@ const LoginPage = () => {
       const userObj = await res.json();
       mutate(userObj);
     } else {
-			res.json().then(console.log);
+			res.json();
       setErrorMsg('Incorrect username or password. Try again!');
     }
   }

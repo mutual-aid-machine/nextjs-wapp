@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useUser } from '../lib/hooks';
 import { mergeLeft } from 'ramda';
 import Navbar from 'react-bootstrap/Navbar';
+const description = "mutual aid aid is means of connecting people for mutual aid."
 const handleLogoutUncurried = (mutate) => () => {
 	fetch('/api/auth', {
 		method: 'DELETE',
@@ -223,7 +224,7 @@ export default ({ children }) => {
         `}
       </style>
       <Head>
-        <title>Next.js + MongoDB App</title>
+        <title>Mutual Aid Aid</title>
         <meta
           key="viewport"
           name="viewport"
@@ -231,17 +232,19 @@ export default ({ children }) => {
         />
         <meta
           name="description"
-          content="nextjs-mongodb-app is a continously developed app built with Next.JS and MongoDB. This project goes further and attempts to integrate top features as seen in real-life apps."
+          content={description}
         />
         <meta property="og:title" content="Next.js + MongoDB App" />
         <meta
           property="og:description"
-          content="nextjs-mongodb-app is a continously developed app built with Next.JS and MongoDB. This project goes further and attempts to integrate top features as seen in real-life apps."
+          content={description}
         />
+				{/*
         <meta
           property="og:image"
           content="https://repository-images.githubusercontent.com/201392697/5d392300-eef3-11e9-8e20-53310193fbfd"
         />
+				*/}
       </Head>
       <header>
 				<MeNavBar

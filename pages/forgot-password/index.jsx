@@ -25,17 +25,20 @@ const ForgetPasswordPage = () => {
         <title>Forget password</title>
       </Head>
       <h2>Forget password</h2>
-      <form onSubmit={handleSubmit}>
-        <p>Do not worry. Simply enter your email address below.</p>
-        <label htmlFor="email">
-          <input
-            id="email"
-            type="email"
-            placeholder="Email"
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
+			<p>Haven't implemented this yet. Hold tight!</p>
+      {/*
+      	<form onSubmit={handleSubmit}>
+      	  <p>Do not worry. Simply enter your email address below.</p>
+      	  <label htmlFor="email">
+      	    <input
+      	      id="email"
+      	      type="email"
+      	      placeholder="Email"
+      	    />
+      	  </label>
+      	  <button type="submit">Submit</button>
+      	</form>
+			*/}
     </>
   );
 };

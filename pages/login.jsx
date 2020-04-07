@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import { useUser } from '../lib/hooks';
 export const sendHomeIfDefined = (user, router, home = '/home') => { if (user) router.push(home); };
 
+const formMargin = 8;
+
 const LoginPage = () => {
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState('');
@@ -55,10 +57,23 @@ const LoginPage = () => {
             placeholder="Password"
           />
         </label>
-        <button type="submit">Sign in</button>
-        <Link href="/forgetpassword">
-          <a>Forget password</a>
-        </Link>
+        <div
+					style={{
+						paddingLeft: `${formMargin}px`,
+						display: 'flex',
+					}}
+				>
+        	<button type="submit">Sign in</button>
+        	<div
+						style={{
+							paddingLeft: '10px'
+						}}
+					>
+        		<Link href="/forgot-password">
+        		  <a>Forgot password</a>
+        		</Link>
+        	</div>
+        </div>
       </form>
     </>
   );

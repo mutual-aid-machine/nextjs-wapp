@@ -5,6 +5,7 @@ import { useUser } from '../lib/hooks';
 import { mergeLeft } from 'ramda';
 import Navbar from 'react-bootstrap/Navbar';
 const description = "mutual aid aid is means of connecting people for mutual aid."
+const defaultFont = "'DM Serif Display'";
 const handleLogoutUncurried = (mutate) => () => {
 	fetch('/api/auth', {
 		method: 'DELETE',
@@ -142,15 +143,6 @@ export default ({ children }) => {
             align-items: center;
             width: 100%;
           }
-					/*
-          form {
-            margin-bottom: 0.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-          }
-					*/
           input,
           textarea {
             font-family: monospace;
@@ -166,15 +158,16 @@ export default ({ children }) => {
             padding: 10px 25px;
           }
           button {
+						font-family: ${defaultFont};
+						font-size: 1.17em;
             display: block;
             margin-bottom: 0.5rem;
-            color: #fff;
-            border-radius: 5px;
+            color: ${wildColor('green')};
             border: none;
             background-color: #000;
             cursor: pointer;
             transition: all 0.2s ease 0s;
-            padding: 10px 25px;
+            padding: 5px 25px;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
           }
           button:hover,

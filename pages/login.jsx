@@ -3,9 +3,11 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useUser } from '../lib/hooks';
+import { WildLink } from '../components/layout';
 export const sendHomeIfDefined = (user, router, home = '/home') => { if (user) router.push(home); };
 
 const formMargin = 8;
+const buttonMarginBottom = '8px';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -61,17 +63,22 @@ const LoginPage = () => {
 					style={{
 						paddingLeft: `${formMargin}px`,
 						display: 'flex',
+						flexDirection: 'row',
+						alignItems: 'center'
 					}}
 				>
         	<button type="submit">Sign in</button>
         	<div
 						style={{
-							paddingLeft: '10px'
+							paddingLeft: '10px',
+							marginBottom: buttonMarginBottom,
 						}}
 					>
-        		<Link href="/forgot-password">
-        		  <a>Forgot password</a>
-        		</Link>
+						<WildLink
+							href="/forgot-password"
+							title='Forgot password'
+							color='pink'
+						/>
         	</div>
         </div>
       </form>

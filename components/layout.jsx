@@ -11,14 +11,29 @@ const handleLogoutUncurried = (mutate) => () => {
 		method: 'DELETE',
 	}).then(() => mutate(null));
 };
+
+const colors = {
+	pink: '#d2738b',
+	'light-teal': '#80d3d0',
+	'lighter-teal': '#78aca8',
+	'teal': '#4d8d89',
+	'yellow': '#d8e27c',
+	white: '#ffffff',
+};
+
 export const wildColor = c => {
+	// https://paletton.com/#uid=35s0u0keusT5fMy9E-UjEnGoNiv
 	switch(c) {
 		case 'pink':
 			return '#d2738b';
+		case 'light-teal':
+			return '#80d3d0';
+		case 'lighter-teal':
+			return '#78aca8';
 		case 'teal':
-			return '#559a82';
-		case 'green':
-			return '#c9dd79';
+			return '#4d8d89';
+		case 'yellow':
+			return '#d8e27c';
 		default:
 			return '#ffffff';
 	}
@@ -31,24 +46,30 @@ export const wildStyle = ({color = 'white', width = 'fit-content'} = {}) => ({
 	// fontStyle: 'italic',
 });
 
-//color in pink | teal | green
 export const WildLink = ({
-	href, title, color, component, long = false, style: pStyle = {}
+	href, title, color, component = null, long = false, style: pStyle = {}
 }) => {
 	const width = long ? '100%' : 'fit-content';
 	const style = mergeLeft(wildStyle({color, width}), pStyle);
+	const className = `wildin-at-${color}`;
 
 	const text = component ? (
-		<component style={style}>{title}</component>
+		<component style={style}>
+			<a>
+				{title}
+			</a>
+		</component>
 	) : (
-		<h3 style={style}>{title}</h3>
+		<h3 style={style}>
+			<a style={style}>
+				{title}
+			</a>
+		</h3>
 	);
 
 	return (
 		<Link href={href}>
-			<a>
-				{text}
-			</a>
+			{text}
 		</Link>
 	);
 };
@@ -62,13 +83,13 @@ export const MeNavBar = ({
 			<WildLink
 				href="/login"
 				title='Sign in'
-				color='green'
+				color='yellow'
 				component={props => <p {...props}/>}
 			/>
 			<WildLink
 				href="/signup"
 				title='Sign up'
-				color='green'
+				color='yellow'
 				component={props => <p {...props}/>}
 			/>
 		</>
@@ -77,7 +98,7 @@ export const MeNavBar = ({
 			<WildLink
 				href="/profile"
 				title='Profile'
-				color='green'
+				color='yellow'
 				component={props => <p {...props}/>}
 			/>
 			{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
@@ -111,6 +132,7 @@ export default ({ children }) => {
   const [user, { mutate }] = useUser();
 	const title = 'Mutual Aid Aid';
 	const handleLogout = handleLogoutUncurried(mutate);
+	const isntLightest = c => !c.includes('est');
   return (
     <>
       <style jsx global>
@@ -118,11 +140,13 @@ export default ({ children }) => {
           a {
             text-decoration: none !important;
             cursor: pointer;
-            color: #0070f3;
+            color: ${wildColor('teal')};
+						background-color: #000;
+						padding: 5px;
           }
-          a:hover {
-            color: #0366d6;
-          }
+					a:hover {
+						color: ${wildColor('light-teal')};
+					}
           body {
             margin: 0;
             padding: 0;
@@ -162,7 +186,7 @@ export default ({ children }) => {
 						font-size: 1.17em;
             display: block;
             margin-bottom: 0.5rem;
-            color: ${wildColor('green')};
+            color: ${wildColor('yellow')};
             border: none;
             background-color: #000;
             cursor: pointer;

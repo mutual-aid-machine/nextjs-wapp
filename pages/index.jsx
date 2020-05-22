@@ -21,17 +21,6 @@ const links = [
 ]
 
 export const MenuItem = ({href, text, component}, idx) => {
-	const textyBit = component ? (
-		<a>
-			<component>
-				{text}
-			</component>
-		</a>
-	) : (
-		<a>
-			<h3>{text}</h3>
-		</a>
-	);
 	return (
 		<WildLink
 			href={href}
